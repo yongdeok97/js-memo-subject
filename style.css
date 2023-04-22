@@ -100,7 +100,7 @@ button {
     position: absolute;
     margin: 0;
     padding: 0;
-    transform: rotateY(0deg);
+    /* transform: rotateY(0deg); */
 }
 
 .read.back {
@@ -111,9 +111,8 @@ button {
     background-color: #618c75;
     border-radius: 20px;
 }
-
-
-/* .read-container:hover .read.front { 
+/* 
+.read-container:hover .read.front {
     transform: rotateY(180deg);
 }
 
@@ -134,17 +133,20 @@ button {
 
 
 
-.back button {
+.list-btn {
+    width: 80%;
     position: absolute;
-    font-size: 40px;
-}
-.back-btn {
-    left: 10px;
+    left: 10%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 10px red;
 }
 
+.back-btn,
 .delete-btn {
-    right: 10px;
+    font-size: 40px;
 }
+
 
 .storage-btn {
     position: absolute;
@@ -157,6 +159,7 @@ button {
     bottom: 4px;
     right: -33px;
 }
+
 .storage-btn:active {
     background-color: rgb(83, 105, 88);
     border: 7px solid rgba(0, 0, 0, .2);

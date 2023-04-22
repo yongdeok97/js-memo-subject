@@ -1,81 +1,96 @@
-const title = document.querySelector(".write .title");
-const contents = document.querySelector(".write .contents");
+const title = document.querySelector(".write .title textArea");
+const contents = document.querySelector(".write .contents textArea");
 const itemList = document.querySelector(".read-container ul");
+const backItem = document.querySelector(".read.back");
+const backContents = document.querySelector(
+  ".read-container .back .memo-contents"
+);
+let itemListLi = document.querySelectorAll(".read-container ul li");
 
-window.localStorage.setItem(0, "1");
-window.localStorage.setItem(1, "1");
-window.localStorage.setItem(2, "1");
+const storageBtn = document.querySelector(".storage-btn");
+const deleteBtn = document.querySelector(".delete-btn");
+const backBtn = document.querySelector(".back-btn");
+let key = 0;
+
+const maxKey = () => {
+  let itemListLength = window.localStorage.length;
+  let max = "0";
+
+  for (let i = 0; i < itemListLength; i++) {
+    if (max < window.localStorage.key(i)) {
+      max = window.localStorage.key(i);
+    }
+  }
+  return max;
+};
 
 // h2 찾기
 const findHT = (str) => {
   const htEnd = `</h2>`;
-  return str.substring(4, str.indexOf(htEnd));
-};
-// p 찾기
-const findP = (str) => {
-  const pStart = `<p>`;
-  const pEnd = `</p>`;
 
-  return str.substring(str.indexOf(pStart) + 2, str.indexOf(pEnd));
+  return str.substring(4, str.indexOf(htEnd));
 };
 
 //create
-const storage = (title, contents) => {
-  let itemList = window.localStorage.length;
+const storage = () => {
+  let itemListLength = maxKey() === 0 ? 0 : parseInt(maxKey()) + 1;
+
+  if (`${title.value.replaceAll(' ', '')}` === '') {
+    alert('제목을 입력해 주세요');
+    console.log(1);
+    return;
+  }
+
+  if (`${contents.value.replaceAll(' ', '')}}` === '') {
+    alert('내용을 입력해 주세요');
+    return;
+  }
   window.localStorage.setItem(
-    itemList,
-    `<h2>${title.textContent.trim()}</h2><p>${contents.textContent
-      .trim()
-      .replace(/\s/g, "")}</p>`
+    itemListLength,
+    `<h2>${title.value}</h2><p>${contents.value}</p>`
   );
-};
-
-//read
-const readStorage = (key) => {
-  window.localStorage.getItem(
-    `<h2>${title.textContent.trim()}</h2>`,
-    `<p>${contents.textContent.trim()}</p>`
-  );
-};
-
-//delete 아 이거 생각을 아예 잘못했다.
-itemList.onclick = (e) => {
-  const nodes = [...e.target.parentElement.children];
-
-  const index = nodes.indexOf(e.target);
-  console.log(nodes);
-  deleteStorage(index);
-  nodes[index].remove();
-//   e.remove(index);
-  // readAllStorage();
-};
-const deleteStorage = (key) => {
-    window.localStorage.removeItem(key);
-
+  readAllStorage();
 };
 
 // initial State
 const readAllStorage = () => {
-  let itemListLength = window.localStorage.length;
-  console.log(itemList)
+  let itemListLength = maxKey() === 0 ? 0 : parseInt(maxKey()) + 1;
 
-  for (let i = 0; i < itemListLength; i++) {
-    const myLi = document.createElement("li");
-    myLi.textContent = window.localStorage.getItem(i);
-    itemList.appendChild(myLi);
+  itemList.textContent = "";
+  for (let i = 0; i <= itemListLength; i++) {
+    if (window.localStorage.getItem(i) !== null) {
+      const myLi = document.createElement("li");
+      myLi.textContent = findHT(window.localStorage.getItem(i));
+      myLi.addEventListener("click", () => {
+        backContents.innerHTML = window.localStorage.getItem(i);
+        itemList.style.transform = `rotateY(180deg)`;
+        backItem.style.transform = `rotateY(0deg)`;
+        key = i;
+      });
+      itemList.appendChild(myLi);
+    }
   }
+  itemListLi = document.querySelectorAll(".read-container ul li");
 };
 
 const main = (() => {
-    readAllStorage();
+  readAllStorage();
 })();
 
-// console.log(new Date().toString().substring(7, 24).replace(/\s/g, ""));
-// console.log(title.textContent.trim(), contents.textContent.trim());
-// console.log("asdasrtydasd".indexOf("rty"));
+storageBtn.addEventListener("click", () => {
+  storage();
+  title.value = "";
+  contents.value = "";
+});
 
+deleteBtn.addEventListener("click", () => {
+  window.localStorage.removeItem(key);
+  readAllStorage();
+  itemList.style.transform = `rotateY(0deg)`;
+  backItem.style.transform = `rotateY(-180deg)`;
+});
 
-// window.localStorage.setItem(
-//   new Date().toString().substring(0, 24).replace(/\s/g, ""),
-//   `<h2>${title.textContent.trim()}</h2><p>${contents.textContent.trim()}</p>`
-// );
+backBtn.addEventListener("click", () => {
+  itemList.style.transform = `rotateY(0deg)`;
+  backItem.style.transform = `rotateY(-180deg)`;
+});
