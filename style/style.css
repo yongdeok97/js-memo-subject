@@ -1,0 +1,220 @@
+@font-face {
+    font-family: 'TAEBAEKmilkyway';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'TAEBAEKmilkyway';
+}
+
+body {
+    background-color: #E9DB97;
+}
+
+ul li {
+    margin: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: inherit;
+    border: none;
+}
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1520px;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 70px;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0.3125em 0;
+    background-color: #E9DB97;
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.header-text {
+    font-family: "TAEBAEKmilkyway", sans-serif;
+}
+
+.header-text:before {
+    content: "";
+    height: 3px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    position: absolute;
+    width: 300%;
+    top: 50%;
+    left: -100%;
+    z-index: -999;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1800px;
+    margin: 200px auto 30px;
+    gap: 100px;
+}
+
+.write,
+.read-container {
+    width: 40%;
+}
+
+.write {
+    margin-left: auto;
+}
+
+.contents {
+    position: relative;
+}
+
+.read-container {
+    margin-right: auto;
+}
+
+.text-area {
+    box-shadow: 0 0 10px black;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 30px;
+    line-height: 43px;
+    border-radius: 50px;
+    background-color: #A7C38C;
+    border: 7px solid rgba(0, 0, 0, .3);
+}
+
+.title {
+    margin-bottom: 60px;
+}
+
+.title .text-area {
+    height: 100px;
+    line-height: 71px;
+    text-align: center;
+}
+
+.write .contents .text-area {
+    background-image:
+        repeating-linear-gradient(#A7C38C, #A7C38C 43px, #e4d5d5 43px, #e4d5d5 44px, white 41px);
+}
+
+.contents .text-area {
+    min-height: 600px;
+}
+
+.memo-contents {
+    padding: 20px;
+}
+
+.memo-contents h2 {
+    padding: 20px;
+    border-bottom: 2px solid black;
+}
+
+
+.read-container {
+    position: relative;
+}
+
+.read {
+    width: 100%;
+    height: 100%;
+    border: 7px solid rgba(0, 0, 0, .3);
+    border-radius: 50px;
+    font-size: 40px;
+    background-color: #6FA789;
+    perspective: 1300px;
+    overflow: scroll;
+    box-shadow: 0 0 10px black;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transition: 1s;
+}
+
+.read.front {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+.read.back {
+    transform: rotateY(-180deg);
+}
+
+.read.back h2 {
+    background-color: #89ad9a;
+}
+.read.back p {
+    padding: 15px;
+}
+
+.memo-contents {
+    background-color: #89ad9a;
+    height: 80%;
+    width: 80%;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+    margin: 100px auto;
+    padding: 0;
+}
+
+.read.front li:active {
+    background-color: #618c75;
+    border-radius: 20px;
+}
+
+.read li {
+    margin-top: 25px;
+    margin-left: 20px;
+    padding: 15px;
+    border-bottom: 1px solid black;
+    border-radius: 20px 0 0 20px;
+    background-color: #89ad9a;
+}
+
+.list-btn {
+    width: 80%;
+    position: absolute;
+    top: 30px;
+    left: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.back-btn,
+.delete-btn {
+    font-size: 40px;
+}
+
+
+.storage-btn {
+    position: absolute;
+    padding: 15px;
+    font-size: 30px;
+    background-color: rgb(87, 144, 98);
+    margin: 0 auto;
+    border-radius: 15px 15px 30px 15px;
+    border: 7px solid rgba(0, 0, 0, .3);
+    bottom: 4px;
+    right: -33px;
+}
+
+.storage-btn:active {
+    background-color: rgb(83, 105, 88);
+    border: 7px solid rgba(0, 0, 0, .2);
+}
