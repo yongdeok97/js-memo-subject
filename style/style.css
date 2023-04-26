@@ -163,6 +163,14 @@ h2 {
 .read.back p {
     padding: 15px;
 }
+.read.back span {
+    position: absolute;
+    font-size: 30px;
+    display: inline-block;
+    color: rgb(202, 194, 194);
+    bottom: 10%;
+    right: 13%;
+}
 
 .memo-contents {
     background-color: #89ad9a;
@@ -172,6 +180,8 @@ h2 {
     margin: 100px auto;
     padding: 0;
 }
+
+
 
 .read.front li:active {
     background-color: #618c75;

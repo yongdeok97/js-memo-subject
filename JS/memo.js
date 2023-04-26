@@ -18,7 +18,6 @@ const storage = () => {
     alert("제목을 입력해 주세요");
     return;
   }
-
   if (`${contents.value.replaceAll(" ", "")}}` === "") {
     alert("내용을 입력해 주세요");
     return;
@@ -32,25 +31,29 @@ const storage = () => {
 
 // // initial State
 const readAllStorage = () => {
-  let Datas = m.getAllMemo();
+  let datas = m.getAllMemo();
   const frag = document.createDocumentFragment();
-  
+
   itemList.innerHTML = '';
-  if (Datas.length === 0)
+  if (datas.length === 0)
     return ;
-  for (let i = 0; i < Datas.length; i++) {
-      const myLi = document.createElement("li");
-      myLi.textContent = Datas[i]["title"];
-      frag.append(myLi);
-      myLi.addEventListener("click", () => {
-        backContents.innerHTML = `
-          <h2>${Datas[i]["title"]}</h2>
-          <p>${Datas[i]["contents"]}</p>
-        `;
-        key = i;
-        itemList.style.transform = `rotateY(180deg)`;
-        backItem.style.transform = `rotateY(0deg)`;
-      });
+  for (let i = 0; i < m.length; i++) {
+    if (datas[i] === undefined)
+      continue;
+    const myLi = document.createElement("li");
+    myLi.textContent = datas[i]["title"];
+
+    frag.append(myLi);
+    myLi.addEventListener("click", () => {
+      backContents.innerHTML = `
+        <h2>${datas[i]["title"]}</h2>
+        <p>${datas[i]["contents"]}</p>
+        <span>${(datas[i]["date"]).substring(0, 10)}</span>
+      `;
+      key = datas[i]["id"];
+      itemList.style.transform = `rotateY(180deg)`;
+      backItem.style.transform = `rotateY(0deg)`;
+    });
   }
   itemList.appendChild(frag);
 };
@@ -63,7 +66,7 @@ storageBtn.addEventListener("click", () => {
 });
 
 deleteBtn.addEventListener("click", () => {
-  m.deleteMemo(key + 1);
+  m.deleteMemo(key);
   readAllStorage();
   itemList.style.transform = `rotateY(0deg)`;
   backItem.style.transform = `rotateY(-180deg)`;
@@ -76,6 +79,7 @@ backBtn.addEventListener("click", () => {
 
 const main = (() => {
   m.initialize();
+  title.value = "";
+  contents.value = "";
   readAllStorage();
-  m.getAllMemo();
 })();

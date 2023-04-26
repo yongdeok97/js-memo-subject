@@ -16,8 +16,9 @@ export default class Memo {
   initialize = () => {
     let max = 0;
     for (let i = 0; i < window.localStorage.length; i++) {
-      if (max < window.localStorage.key(i)) {
-        max = window.localStorage.key(i);
+      let target = JSON.parse(window.localStorage.getItem(window.localStorage.key(i)));
+      if (max < target['id']) {
+        max = target['id'];
       }
     }
     this.length = +max + 1;
@@ -35,15 +36,16 @@ export default class Memo {
   };
 
   deleteMemo = (id) => {
-    console.log(id);
-    window.localStorage.removeItem(id);
-    this.getAllMemo();
+    window.localStorage.removeItem(id)
+    this.memoList = this.getAllMemo();
     this.length--;
   };
 
   getAllMemo = () => {
+    this.initialize();
     this.memoList.length = 0;
-    for (let i = 1; i < this.length; i++) {
+
+    for (let i = 1; i <= this.length; i++) {
       if (window.localStorage.getItem(i) !== null) {
         this.memoList.push(window.localStorage.getItem(i));
       }
