@@ -6,6 +6,7 @@ const backItem = document.querySelector(".read.back");
 const storageBtn = document.querySelector(".storage-btn");
 const deleteBtn = document.querySelector(".delete-btn");
 const backBtn = document.querySelector(".back-btn");
+const updateBtn = document.querySelector(".update-btn");
 const backContents = document.querySelector(
   ".read-container .back .memo-contents"
 );
@@ -27,6 +28,7 @@ const storage = () => {
     `${title.value.trim()}`,
     `${contents.value.trim()}`
   );
+  alert('저장 되었습니다.')
 };
 
 // // initial State
@@ -58,6 +60,13 @@ const readAllStorage = () => {
   itemList.appendChild(frag);
 };
 
+const update = () => {
+  const memo = m.getMemo(key);
+
+  title.value = memo['title'];
+  contents.value = memo['contents'];
+}
+
 storageBtn.addEventListener("click", () => {
   storage();
   readAllStorage();
@@ -67,10 +76,23 @@ storageBtn.addEventListener("click", () => {
 
 deleteBtn.addEventListener("click", () => {
   m.deleteMemo(key);
+  alert('삭제 되었습니다.')
   readAllStorage();
   itemList.style.transform = `rotateY(0deg)`;
   backItem.style.transform = `rotateY(-180deg)`;
 });
+
+// backContents.addEventListener('click', () => {
+//   console.log('asd');
+
+// })
+updateBtn.addEventListener('click', () => {
+  update();
+  m.deleteMemo(key);
+  readAllStorage();
+  itemList.style.transform = `rotateY(0deg)`;
+  backItem.style.transform = `rotateY(-180deg)`;
+})
 
 backBtn.addEventListener("click", () => {
   itemList.style.transform = `rotateY(0deg)`;

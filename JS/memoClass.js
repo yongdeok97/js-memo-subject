@@ -41,6 +41,10 @@ export default class Memo {
     this.length--;
   };
 
+  getMemo = (id) => {
+    return JSON.parse(window.localStorage.getItem(id));
+  }
+
   getAllMemo = () => {
     this.initialize();
     this.memoList.length = 0;

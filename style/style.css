@@ -120,6 +120,7 @@ h2 {
 
 .memo-contents {
     padding: 20px;
+    display: block;
 }
 
 .memo-contents h2 {
@@ -130,6 +131,7 @@ h2 {
 
 .read-container {
     position: relative;
+    overflow: hidden;
 }
 
 .read {
@@ -140,12 +142,11 @@ h2 {
     font-size: 40px;
     background-color: #6FA789;
     perspective: 1300px;
-    overflow: scroll;
+    overflow: hidden;
     box-shadow: 0 0 10px black;
     box-sizing: border-box;
     backface-visibility: hidden;
     transition: 1s;
-    overflow: scroll;
 }
 
 .read.front {
@@ -215,7 +216,7 @@ h2 {
     font-size: 40px;
 }
 
-
+.update-btn,
 .storage-btn {
     position: absolute;
     padding: 15px;
@@ -228,7 +229,14 @@ h2 {
     right: -33px;
 }
 
+.update-btn {
+    right: -10px;
+    bottom: -5px;
+    background-color: rgb(96, 134, 103);
+    border: 7px solid rgba(38, 34, 34, 0.3);
+}
+.update-btn:active,
 .storage-btn:active {
     background-color: rgb(83, 105, 88);
-    border: 7px solid rgba(0, 0, 0, .2);
+    border: 7px solid rgba(0, 0, 0, 0.5);
 }
